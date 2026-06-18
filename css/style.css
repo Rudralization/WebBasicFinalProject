@@ -604,7 +604,7 @@ footer p { color: #5b5580; font-size: 0.85rem; }
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(1.03);
   box-shadow: 0 24px 48px rgba(79, 70, 229, 0.15);
   border-color: #c7bfff;
 }
