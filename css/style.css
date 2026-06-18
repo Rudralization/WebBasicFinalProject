@@ -43,6 +43,9 @@ html { scroll-behavior: smooth; font-size: 15px; }
 .project-card:nth-child(4),
 .gallery-item:nth-child(4) { animation-delay: 0.2s; }
 
+.project-card:nth-child(5) { animation-delay: 0.25s; }
+.project-card:nth-child(6) { animation-delay: 0.3s; }
+
 .gallery-item:nth-child(5) { animation-delay: 0.25s; }
 .gallery-item:nth-child(6) { animation-delay: 0.3s; }
 .gallery-item:nth-child(7) { animation-delay: 0.35s; }
@@ -61,11 +64,11 @@ body {
 }
 
 .stat-box, .team-card, .edu-card, .skill-card, .project-card,
-.info-card, .profile-card, .btn-primary, .btn-secondary, .project-btn,
+.info-card, .profile-card, .btn-primary, .btn-secondary,
 .cta-btn, .tech-stack span, .social-links a, .hero-image img,
 .card-image img, .project-image img, .profile-card img,
 .gallery-item, .nav-links a, .contact-form button,
-.project-tech span {
+.project-tags span, .project-overlay a {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease, opacity 0.3s ease;
   backface-visibility: hidden;
 }
@@ -579,116 +582,125 @@ footer p { color: #5b5580; font-size: 0.85rem; }
 }
 
 .projects-section {
-  padding: 20px 5% 55px;
+  padding: 20px 5% 60px;
   width: 100%;
 }
 
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
+  gap: 28px;
 }
 
 .project-card {
-  overflow: hidden;
-  border-radius: 8px;
   background: #fff;
-  border: 1px solid #ddd6fe;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(79, 70, 229, 0.1);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.3s ease;
 }
 
 .project-card:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 24px rgba(79, 70, 229, 0.2);
-  border-color: #4f46e5;
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(79, 70, 229, 0.2);
+  border-color: rgba(79, 70, 229, 0.3);
 }
 
-.project-image { height: 200px; overflow: hidden; }
+.project-image {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+}
 
 .project-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 2px solid transparent;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.project-embed {
-  height: 220px;
-  overflow: hidden;
-  position: relative;
-  background: #f5f3ff;
+.project-card:hover .project-image img {
+  transform: scale(1.1);
 }
 
-.project-embed iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  transition: opacity 0.5s ease;
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(79, 70, 229, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.project-content { padding: 22px; }
-
-.project-tag {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 5px;
-  background: rgba(79, 70, 229, 0.08);
-  border: 1px solid rgba(79, 70, 229, 0.2);
-  color: #4f46e5;
-  margin-bottom: 12px;
-  font-size: 0.78rem;
+.project-card:hover .project-overlay {
+  opacity: 1;
 }
 
-.project-content h3 {
+.project-overlay a {
+  width: 55px;
+  height: 55px;
+  background: #fff;
+  color: #1e1b4b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.project-overlay a:hover {
+  transform: translateY(-6px) scale(1.12);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.project-info {
+  padding: 24px;
+  background: linear-gradient(135deg, #fff 0%, #f8f7ff 100%);
+}
+
+.project-info h3 {
   color: #1e1b4b;
   margin-bottom: 10px;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
-.project-content p {
+.project-info p {
   color: #5b5580;
   line-height: 1.6;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   font-size: 0.88rem;
 }
 
-.project-tech {
+.project-tags {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 18px;
 }
 
-.project-tech span {
-  padding: 4px 10px;
-  border-radius: 5px;
-  background: #f0edff;
-  color: #5b5580;
+.project-tags span {
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(0, 206, 201, 0.08));
+  color: #4f46e5;
   font-size: 0.78rem;
-  border: 1px solid #ddd6fe;
-}
-
-.project-tech span:hover {
-  transform: scale(1.09);
-  background: #4f46e5;
-  color: #fff;
-  border-color: #4f46e5;
-}
-
-.project-btn {
-  display: inline-block;
-  padding: 10px 22px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: #fff;
   font-weight: 600;
-  background: #4f46e5;
-  font-size: 0.86rem;
+  border: 1px solid rgba(79, 70, 229, 0.15);
+  transition: all 0.3s ease;
 }
 
-.project-btn:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 20px rgba(79, 70, 229, 0.35);
-  background: #4338ca;
+.project-tags span:hover {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(0, 206, 201, 0.15));
+  border-color: rgba(79, 70, 229, 0.3);
+  transform: translateY(-2px);
 }
 
 /* ─── Contact ─── */
@@ -974,14 +986,14 @@ footer p { color: #5b5580; font-size: 0.85rem; }
   .projects-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  .project-embed {
-    height: 300px;
+  .project-image {
+    height: 240px;
   }
 }
 
 @media (min-width: 821px) and (max-width: 1099px) {
-  .project-embed {
-    height: 260px;
+  .project-image {
+    height: 220px;
   }
 }
 
@@ -1032,10 +1044,10 @@ footer p { color: #5b5580; font-size: 0.85rem; }
   .education-grid { grid-template-columns: 1fr; }
   .projects-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 24px;
   }
-  .project-embed {
-    height: 240px;
+  .project-image {
+    height: 200px;
   }
 }
 
@@ -1056,13 +1068,18 @@ footer p { color: #5b5580; font-size: 0.85rem; }
   .stat-box h3 { font-size: 1.3rem; }
   .contact-form { padding: 18px; }
   .card-image { height: 200px; }
-  .project-embed {
-    height: 200px;
+  .project-image {
+    height: 180px;
   }
-  .project-content {
-    padding: 16px;
+  .project-info {
+    padding: 18px;
   }
-  .project-content h3 {
+  .project-info h3 {
+    font-size: 1.1rem;
+  }
+  .project-overlay a {
+    width: 45px;
+    height: 45px;
     font-size: 1.1rem;
   }
 }
